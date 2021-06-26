@@ -13,5 +13,5 @@ const io = socketio(server);
 //model
 const Game = require("./models/GameInstance");
 
-//make an atlas server later
-//mongoose.connect("",{useNewUrlParser:true,useUnifiedTopology: true},()=>{console.log("MongoDB Connected");});
+//server connection
+mongoose.connect("",{useNewUrlParser:true,useUnifiedTopology: true},()=>{console.log("MongoDB Connected");});
