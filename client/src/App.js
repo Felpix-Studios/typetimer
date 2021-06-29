@@ -4,26 +4,19 @@ import React from 'react';
 import {BrowserRouter as Router, Route, Switch, Link} from 'react-router-dom';
 import logo from './logo.svg';
 import './App.css';
-
+import { ChakraProvider } from '@chakra-ui/react';
+import Navbar from './components/navbar';
 import Index from './components/index';
 import Game from './components/game';
 
 export default function App(){
   return(
+    <ChakraProvider>
     <div className="App">
     <Router>
     <div>
       <h2>TypeTimer</h2>
-      <nav>
-        <ul>
-          <li>
-            <Link to="/">homes</Link>
-          </li>
-          <li>
-            <Link to="/game">game</Link>
-          </li>
-        </ul>
-      </nav>
+      <Navbar></Navbar>
     </div>
     <Switch>
       <Route path = "/" exact component = {Index}/>
@@ -31,6 +24,7 @@ export default function App(){
     </Switch>
   </Router>
   </div>
+  </ChakraProvider>
   );
 };
   
