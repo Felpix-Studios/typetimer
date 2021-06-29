@@ -3,7 +3,7 @@ import {
     Heading 
 } from '@chakra-ui/react'
 
-export const Game = () => {
+export const Home = () => {
     return (
         <Flex justifyContent="center" alignItems="top" height="100vh">
             <Heading
@@ -12,7 +12,7 @@ export const Game = () => {
             bgClip="text"
             padding="2rem"
             >
-                Game
+                Home
             </Heading>
         </Flex>
     )

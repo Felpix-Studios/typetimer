@@ -1,31 +1,58 @@
-
-
 import React from 'react';
-import {BrowserRouter as Router, Route, Switch, Link} from 'react-router-dom';
-import logo from './logo.svg';
+//import {BrowserRouter as Router, Route, Switch, Link} from 'react-router-dom';
 import './App.css';
-import { ChakraProvider } from '@chakra-ui/react';
-import Navbar from './components/navbar';
-import Index from './components/index';
-import Game from './components/game';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
+import {
+  ChakraProvider,
+  ColorModeProvider,
+  Text,
+  Header,
+  Flex, 
+} from '@chakra-ui/react';
+import theme from './theme'
+import {Container} from './components/Container';
+import { Navbar } from './components/Navbar';
+import { Home } from './components/Home'
+import { Game } from './components/Game'
 
 export default function App(){
   return(
-    <ChakraProvider>
-    <div className="App">
     <Router>
-    <div>
-      <h2>TypeTimer</h2>
-      <Navbar></Navbar>
-    </div>
-    <Switch>
-      <Route path = "/" exact component = {Index}/>
-      <Route path = "/game" component = {Game}/>
-    </Switch>
-  </Router>
-  </div>
+    <ChakraProvider resetCSS theme = {theme}>
+      <ColorModeProvider options={{useSystemColorMode:true}}>
+        
+        <Container height="100vh">
+          <Navbar/>
+          
+            <Switch>
+              <Route exact path="/">
+                <Home />
+              </Route>
+              <Route path="/game">
+                <Game />
+              </Route>
+            </Switch>
+          
+        </Container>
+        
+      </ColorModeProvider>
   </ChakraProvider>
+  </Router>
   );
 };
   
 
+/*<Router>
+            <div>
+              <Navbar></Navbar>
+            </div>
+            <Switch>
+              <Route path = "/" exact component = {Home}/>
+              <Route path = "/game" component = {Game}/>
+            </Switch>
+          </Router>*/

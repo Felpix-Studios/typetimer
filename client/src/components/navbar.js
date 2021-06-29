@@ -1,46 +1,39 @@
-import React from 'react';
+import { 
+    useColorMode,
+    Switch,
+    Flex,
+    Button 
+} from '@chakra-ui/react'
 import {
     BrowserRouter as Router,
-    Switch,
     Route,
     Link
 } from "react-router-dom";
-import {
-    Menu,
-    MenuButton,
-    MenuList,
-    MenuItem,
-    MenuItemOption,
-    MenuGroup,
-    MenuOptionGroup,
-    MenuIcon,
-    MenuCommand,
-    MenuDivider,
-} from "@chakra-ui/react"
 
-
-class navbar extends React.Component{
-    constructor(props){
-        super(props);
-    }
-
-    render(){
-        return (
-        <div className="navbar">
-            <h2>navbar</h2>
-            <nav>
-                <ul>
-                    <li>
-                        <Link to="/">homes</Link>
-                    </li>
-                    <li>
-                        <Link to="/game">game</Link>
-                    </li>
-                </ul>
-            </nav>
-        </div>
-        )
-    }
+export const Navbar = () => {
+    const { colorMode, toggleColorMode } = useColorMode()
+    const isDark = colorMode === 'dark'
+    const color = { light: 'black', dark: 'white' }
+    return (
+        <Flex>
+            <Flex
+                position="fixed"
+                top="1rem"
+                right="1rem"
+                color={color[colorMode]}
+                align='center'>
+                <Flex>
+                    <Link to="/"><Button  as="a" variant="ghost" w="100%" my={1}>Home</Button></Link>
+                    <Link to="/game"><Button  as="a" variant="ghost" w="100%" my={1} >Game</Button></Link>
+                </Flex>
+                <Switch
+                    ml={4}
+                    isChecked={isDark}
+                    onChange={toggleColorMode}
+                />
+            </Flex>
+            
+        </Flex>
+    
+    )
 }
-
-export default navbar;
