@@ -14,7 +14,8 @@ import {
   Header,
   Flex, 
 } from '@chakra-ui/react';
-import theme from './theme'
+import theme from './theme';
+import History from './components/History';
 import {Container} from './components/Container';
 import { Navbar } from './components/Navbar';
 import { Home } from './components/Home'
@@ -22,7 +23,7 @@ import { Game } from './components/Game'
 
 export default function App(){
   return(
-    <Router>
+    <Router history = {History}>
     <ChakraProvider resetCSS theme = {theme}>
       <ColorModeProvider options={{useSystemColorMode:true}}>
         

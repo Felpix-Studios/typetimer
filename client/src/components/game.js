@@ -11,6 +11,7 @@ export const Game = () => {
             bgGradient="linear(to-l, #56CCF2, #2F80ED)"
             bgClip="text"
             padding="2rem"
+            textAlign="center"
             >
                 Game
             </Heading>
