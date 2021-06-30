@@ -21,8 +21,8 @@ export const Home = (props) => {
                     Home
                 </Heading>
                 <Flex justify='center' gridGap={6}>
-                    <Button fontWeight="400">Create Game</Button>
-                    <Button fontWeight="400">Join Game</Button>
+                    <Button fontWeight="400" onClick = {()=> history.push('/game/create')} >Create Game</Button>
+                    <Button fontWeight="400" onClick = {()=> history.push('/game/join')}>Join Game</Button>
                 </Flex>
                 
             </Stack>
