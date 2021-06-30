@@ -2,7 +2,7 @@ import {
     Flex,
     Heading,
     Button,
-    Stack 
+    Stack, 
 } from '@chakra-ui/react'
 import { useHistory } from 'react-router-dom';
 
@@ -12,7 +12,7 @@ export const Home = (props) => {
         <Flex justifyContent="center" alignItems="top" height="100vh">
             <Stack>
                 <Heading
-                fontSize="10vw"
+                fontSize="8vw"
                 bgGradient="linear(to-l, #56CCF2, #2F80ED)"
                 bgClip="text"
                 padding="2rem"
