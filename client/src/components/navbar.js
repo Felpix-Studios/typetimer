@@ -28,7 +28,7 @@ export const Navbar = () => {
             <Flex
                 position="fixed"
                 top="1rem"
-                right="1rem"
+                left="2rem"
                 color={color[colorMode]}
                 align='center'
             >
@@ -36,7 +36,7 @@ export const Navbar = () => {
                 <Flex
                     display={['none','none','flex','flex']}
                     gridGap="1rem"
-                    
+        
                 >
                     <Link to="/"><Button  as="a" variant="ghost" w="100%" my={1} fontWeight="400">Home</Button></Link>
                     <Link to="/game"><Button  as="a" variant="ghost" w="100%" my={1} fontWeight="400">Game</Button></Link>
@@ -51,6 +51,9 @@ export const Navbar = () => {
                 />
                 <Switch
                     ml={4}
+                    position="fixed"
+                    top="2rem"
+                    right="2rem"
                     isChecked={isDark}
                     onChange={toggleColorMode}
                 />
@@ -67,10 +70,11 @@ export const Navbar = () => {
                 flexDir="column"
                 display = {display}
             >
-                <Flex justify="flex-end">
+                <Flex justify="flex-start">
                     <IconButton
-                        mt={2}
-                        mr={2}
+                        mt="1rem"
+                        ml="2rem"
+                        mb="1rem"
                         aria-label = "X Icon"
                         size = "md"
                         icon = {<CloseIcon/>}
@@ -82,8 +86,8 @@ export const Navbar = () => {
                     align="center"
                     w="100vw"
                 >
-                    <Link to="/"><Button  as="a" variant="ghost" w="80vw"  p={24}     fontWeight="400" onClick = {()=>changeDisplay('none')}>Home</Button></Link>
-                    <Link to="/game"><Button  as="a" variant="ghost" w="80vw"  p={24}    fontWeight="400" onClick = {()=>changeDisplay('none')}>Game</Button></Link>
+                    <Link to="/"><Button  as="a" variant="ghost" w="100vw"  p={24}     fontWeight="400" onClick = {()=>changeDisplay('none')}>Home</Button></Link>
+                    <Link to="/game"><Button  as="a" variant="ghost" w="100vw"  p={24}    fontWeight="400" onClick = {()=>changeDisplay('none')}>Game</Button></Link>
                 </Flex>
             </Flex>
         </Flex>
