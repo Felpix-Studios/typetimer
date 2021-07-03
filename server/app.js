@@ -20,7 +20,7 @@ const io = socketio(server,{
 const Game = require("./models/GameInstance");
 
 //server connection
-mongoose.connect("",{useNewUrlParser:true,useUnifiedTopology: true},()=>{console.log("MongoDB Connected");});
+mongoose.connect("mongodb+srv://Felpix:felpix@cluster0.mrmfi.mongodb.net/games?retryWrites=true&w=majority",{useNewUrlParser:true,useUnifiedTopology: true},()=>{console.log("MongoDB Connected");});
 
 io.on('connect',(socket)=>{
     console.log("connected");

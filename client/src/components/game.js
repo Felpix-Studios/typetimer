@@ -13,7 +13,8 @@ import {
 } from '@chakra-ui/react'
 
 export const Game = (props)=> {
-    
+    let time = props.forceUpdate;
+    console.log(time);
     return (
         <Flex justifyContent="center" alignItems="top" height="100vh" >
             <Stack>

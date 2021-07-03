@@ -13,16 +13,15 @@ import {
 } from '@chakra-ui/react'
 
 export const CreateGame = (props)=> {
-    const [userName,setUserName] = useState("");
+    const [username,setUsername] = useState("");
     const onChange = (e)=>{
-        setUserName(e.target.value);
+        setUsername(e.target.value);
     }
 
-    const onSubmit =e=>{
+    const onSubmit = (e)=>{
         e.preventDefault();
-        socket.emit('create-game',userName);
+        socket.emit('create-game',username);
     }
-
     return (
         <Flex justifyContent="center" alignItems="top" height="100vh">
             <Stack>
@@ -37,9 +36,9 @@ export const CreateGame = (props)=> {
                 </Heading>
                 <form onSubmit={onSubmit}>
                     <FormControl isRequired >
-                        <FormLabel>Enter    Username</ FormLabel>
-                        <Input type="text" name =   "username" onChange=  {onChange} value =    {userName} placeholder =   "Enter your Username"     className =     "form-control"/>
-                        <Button mt={4} fontWeight   = "400" type = "submit"   onClick = {()=>console.log    (userName)} >Start Game</   Button>
+                        <FormLabel>Enter Username</ FormLabel>
+                        <Input type="text" name =   "username" onChange=  {onChange} value =    {username} placeholder =   "Enter your Username"     className =     "form-control"/>
+                        <Button mt={4} fontWeight   = "400" type = "submit" >Start Game</   Button>
                     </FormControl>
                 </form>
             </Stack>
