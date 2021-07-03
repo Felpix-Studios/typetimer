@@ -36,6 +36,7 @@ export const JoinGame = (props) => {
 				>
 					Join Game
 				</Heading>
+                
 				<form onSubmit={onSubmit}>
 					<FormControl isRequired>
 						<FormLabel>Enter Game ID</FormLabel>
