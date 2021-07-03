@@ -4,6 +4,8 @@ const socketio = require('socket.io');
 const mongoose = require("mongoose");
 const app = express();
 const port = 5000;
+let key = require('./secrets.json');
+console.log(key.key);
 
 app.use(cors());
 
@@ -20,7 +22,7 @@ const io = socketio(server,{
 const Game = require("./models/GameInstance");
 
 //server connection
-mongoose.connect("mongodb+srv://Felpix:felpix@cluster0.mrmfi.mongodb.net/games?retryWrites=true&w=majority",{useNewUrlParser:true,useUnifiedTopology: true},()=>{console.log("MongoDB Connected");});
+mongoose.connect(key.key,{useNewUrlParser:true,useUnifiedTopology: true},()=>{console.log("MongoDB Connected");});
 
 io.on('connect',(socket)=>{
     console.log("connected");

@@ -23,6 +23,7 @@ export const JoinGame = (props) => {
         console.log(userInput);
 		socket.emit("join-game", userInput);
 	};
+    
 	return (
 		<Flex justifyContent="center" alignItems="top" height="100vh">
 			<Stack>

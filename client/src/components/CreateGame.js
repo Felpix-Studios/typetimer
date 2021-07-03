@@ -35,6 +35,7 @@ export const CreateGame = (props)=> {
                     Create Game
                 </Heading>
                 <form onSubmit={onSubmit}>
+
                     <FormControl isRequired >
                         <FormLabel>Enter Username</ FormLabel>
                         <Input type="text" name =   "username" onChange=  {onChange} value =    {username} placeholder =   "Enter your Username"     className =     "form-control"/>
