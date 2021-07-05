@@ -5,7 +5,6 @@ const mongoose = require("mongoose");
 const app = express();
 const port = 5000;
 let key = require('./secrets.json');
-console.log(key.key);
 
 app.use(cors());
 
@@ -25,8 +24,8 @@ const Game = require("./models/GameInstance");
 mongoose.connect(key.key,{useNewUrlParser:true,useUnifiedTopology: true},()=>{console.log("MongoDB Connected");});
 
 io.on('connect',(socket)=>{
-    console.log("connected");
-    socket.on('create-game',async (userName)=>{
+    console.log("socket.io connected");
+    socket.on('create-game',async (username)=>{
         console.log("game create");
         try{
             let game = new Game();
@@ -34,17 +33,35 @@ io.on('connect',(socket)=>{
             let player = {
                 socketID : socket.id,
                 isPartyLeader : true,
-                nickname: userName
+                nickname: username
             }
             game.players.push(player);
-            console.log(game);
-            //game =  await game.save();
+            game =  await game.save();
         
             const gameID = game._id.toString();
             socket.join(gameID);
             io.to(gameID).emit('updateGame',game);
         
             
+        }catch(err){
+            console.log(err);
+        }
+    });
+    socket.on('join-game',async ({gameID:_id,username})=>{
+        console.log("game join");
+        try{
+            let game = await Game.findById(_id);
+            if(game.isOpen){
+                const gameID = game._id.toString();
+                socket.join(gameID);
+                let player = {
+                    socketID : socket.id,
+                    nickname: username
+                }
+                game.players.push(player);
+                game = await game.save();
+                io.to(gameID).emit('updateGame',game);
+            }
         }catch(err){
             console.log(err);
         }

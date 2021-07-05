@@ -54,7 +54,7 @@ export default function App() {
 							<Route exact path="/" component={Home} />
 							<Route exact path="/game/create" component={CreateGame} />
                             <Route exact path="/game/join" component={JoinGame} />
-							<Route path="/game/"><Game key = {Date.now()}/></Route>
+							<Route path="/game/:gameID"><Game gameState = {gameState}/></Route>
 						</Switch>
 					</Container>
 				</ColorModeProvider>

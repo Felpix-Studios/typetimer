@@ -39,7 +39,7 @@ export const CreateGame = (props)=> {
                     <FormControl isRequired >
                         <FormLabel>Enter Username</ FormLabel>
                         <Input type="text" name =   "username" onChange=  {onChange} value =    {username} placeholder =   "Enter your Username"     className =     "form-control"/>
-                        <Button mt={4} fontWeight   = "400" type = "submit" >Start Game</   Button>
+                        <Button mt={4} fontWeight = "400" type = "submit" >Start Game</   Button>
                     </FormControl>
                 </form>
             </Stack>

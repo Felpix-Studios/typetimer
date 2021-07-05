@@ -39,7 +39,7 @@ export const JoinGame = (props) => {
                 
 				<form onSubmit={onSubmit}>
 					<FormControl isRequired>
-						<FormLabel>Enter Game ID</FormLabel>
+						<FormLabel>Enter Game ID</FormLabel> 
 						<Input
 							type="text"
 							name="gameID"
@@ -58,7 +58,7 @@ export const JoinGame = (props) => {
 							className="form-control"
 						/>
 						<Button mt={4} fontWeight="400" type="submit">
-							Start Game
+							Join Game
 						</Button>
 					</FormControl>
 				</form>

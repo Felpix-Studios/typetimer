@@ -1,4 +1,7 @@
 import React,{ useState, setState } from 'react';
+import { Redirect } from 'react-router-dom';
+import { Countdown } from './Countdown';
+import { StartBtn } from './StartBtn';
 import socket from '../socketConfig';
 import { 
     Flex,
@@ -12,22 +15,36 @@ import {
     Button
 } from '@chakra-ui/react'
 
-export const Game = (props)=> {
-    let time = props.forceUpdate;
-    console.log(time);
+const findPlayer = players=>{
+    return players.find(player=> player.socketID === socket.id);
+}
+export const Game = ({gameState})=> {
+    console.log(gameState);
+    const { _id,players } = gameState;
+    const player = findPlayer(players);
+    if(_id === ""){
+        return <Redirect to="/"/>
+    }
     return (
-        <Flex justifyContent="center" alignItems="top" height="100vh" >
-            <Stack>
-                <Heading
-                fontSize="8vw"
-                bgGradient="linear(to-l, #56CCF2,   #2F80ED)"
-                bgClip="text"
-                padding="2rem"
-                textAlign="center"
+		<Flex justifyContent="center" alignItems="top" height="100vh">
+			<Stack>
+				<Heading
+					fontSize="8vw"
+					bgGradient="linear(to-l, #56CCF2,   #2F80ED)"
+					bgClip="text"
+					padding="2rem"
+					textAlign="center"
+				>
+					Live Game
+				</Heading>
+				<Stack
+                    justify="center"
+                    align="center"
                 >
-                    Live Game
-                </Heading>
-            </Stack>
-        </Flex>
-    )
+					<Countdown />
+					<StartBtn as="button" player={player} gameID={_id} />
+				</Stack>
+			</Stack>
+		</Flex>
+	);
 }
