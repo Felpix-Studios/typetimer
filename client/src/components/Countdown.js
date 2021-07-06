@@ -1,5 +1,4 @@
-import React, { useState, setState } from "react";
-import { Redirect } from "react-router-dom";
+import React, { useState, useEffect } from "react";
 import socket from "../socketConfig";
 import {
 	Flex,
@@ -15,10 +14,21 @@ import {
 } from "@chakra-ui/react";
 
 export const Countdown = (props) => {
-    console.log(props);
+    const [timer,setTimer] = useState({countDown:"",msg:""});
+    useEffect(()=>{
+        socket.on('timer',(data)=>{
+            setTimer(data);
+        });
+        socket.on('done',()=>{
+            socket.removeListener('timer');
+        })
+    },[]);
+    const {countDown,msg} = timer;
+
 	return (
-		<Flex>
-			<Text>this is a countdown</Text>
-		</Flex>
+		<Stack align="center" justify="center">
+			<Text fontSize="lg">{countDown}</Text>
+			<Text>{msg}</Text>
+		</Stack>
 	);
 };

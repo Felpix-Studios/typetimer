@@ -14,10 +14,14 @@ import {
 } from "@chakra-ui/react";
 
 
-export const StartBtn = (props) => {
-	return (
-		<Flex>
-			<Button fontWeight="400">start</Button>
-		</Flex>
+export const StartBtn = ({player, gameID}) => {
+    const [showBtn, setShowBtn ] = useState(true);
+    const { isPartyLeader } = player;
+	const startMessage=e=>{
+        socket.emit('timer',{playerID:player._id,gameID});
+        setShowBtn(false);
+    };
+    return (
+		isPartyLeader && showBtn ? <Button fontWeight="400" type="button" onClick={startMessage}>Start</Button> : null
 	);
 };

@@ -47,6 +47,7 @@ io.on('connect',(socket)=>{
             console.log(err);
         }
     });
+
     socket.on('join-game',async ({gameID:_id,username})=>{
         console.log("game join");
         try{
@@ -64,6 +65,26 @@ io.on('connect',(socket)=>{
             }
         }catch(err){
             console.log(err);
+        }
+    });
+
+    socket.on('timer',async({gameID,playerID})=>{
+        let countDown = 10;
+        let game = await Game.findById(gameID);
+        let player = game.players.id(playerID);
+        if(player.isPartyLeader){
+            let timerID = setInterval(async()=>{
+                if(countDown>=0){
+                    io.to(gameID).emit('timer',{countDown,msg:"Starting Game"});
+                    countDown--;
+                }else{
+                    game.isOpen = false;
+                    game = await game.save();
+                    io.to(gameID).emit('updateGame',game);
+                    //startGameClock(gameID);
+                    clearInterval(timerID);
+                }
+            },1000);
         }
     });
 });
