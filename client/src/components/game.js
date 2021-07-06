@@ -2,6 +2,7 @@ import React,{ useState, setState } from 'react';
 import { Redirect } from 'react-router-dom';
 import { Countdown } from './Countdown';
 import { StartBtn } from './StartBtn';
+import { DisplayWords } from './DisplayWords';
 import socket from '../socketConfig';
 import { 
     Flex,
@@ -20,7 +21,7 @@ const findPlayer = players=>{
 }
 export const Game = ({gameState})=> {
     console.log(gameState);
-    const { _id,players } = gameState;
+    const { _id,players,words } = gameState;
     const player = findPlayer(players);
     if(_id === ""){
         return <Redirect to="/"/>
@@ -37,10 +38,10 @@ export const Game = ({gameState})=> {
 				>
 					Live Game
 				</Heading>
-				<Stack
-                    justify="center"
-                    align="center"
-                >
+				<Stack justify="center" align="center">
+					<Flex>
+						<DisplayWords words={words} player={player} />
+					</Flex>
 					<Countdown />
 					<StartBtn as="button" player={player} gameID={_id} />
 				</Stack>

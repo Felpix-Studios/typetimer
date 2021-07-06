@@ -22,11 +22,7 @@ const PlayerSchema = new mongoose.Schema({
 });
 
 const GameSchema = new mongoose.Schema({
-    words:[
-        {
-            type:String
-        }
-    ],
+    words:[{type:String}],
     isOpen:{
         type:Boolean,
         default:true

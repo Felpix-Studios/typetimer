@@ -5,7 +5,7 @@ const mongoose = require("mongoose");
 const app = express();
 const port = 5000;
 let key = require('./secrets.json');
-
+const quote = require('./quote');
 app.use(cors());
 
 
@@ -38,7 +38,7 @@ const startGameClock = async (gameID)=>{
                 let endTime = new Date().getTime();
                 let {startTime} = game;
                 game.isOver = true;
-                game.players.forEach((players,index)=>{
+                game.players.forEach((player,index)=>{
                     if(player.WPM ===-1){
                         game.players[index].WPM = calculateWPM(endTime,startTime,player);
                     }
@@ -72,7 +72,8 @@ io.on('connect',(socket)=>{
         console.log("game create");
         try{
             let game = new Game();
-            game.words = "Hi, these are test words.";
+            const newQuote = await quote();
+            game.words = newQuote;
             let player = {
                 socketID : socket.id,
                 isPartyLeader : true,
