@@ -34,7 +34,7 @@ export default function App() {
 		});
 		return () => {
 			socket.removeAllListeners();
-		};
+		}
 	}, []);
 
 	useEffect(() => {
@@ -52,9 +52,23 @@ export default function App() {
 
 						<Switch>
 							<Route exact path="/" component={Home} />
-							<Route exact path="/game/create" component={CreateGame} />
-                            <Route exact path="/game/join" component={JoinGame} />
-							<Route path="/game/:gameID"><Game gameState = {gameState}/></Route>
+							<Route
+								exact
+								path="/game/create"
+								component={CreateGame}
+							/>
+							<Route
+								exact
+								path="/game/join"
+								component={JoinGame}
+							/>
+							<Route
+								path="/game/:gameID"
+								render={(props) => (
+									<Game {...props} gameState={gameState} />
+								)}
+							>
+							</Route>
 						</Switch>
 					</Container>
 				</ColorModeProvider>

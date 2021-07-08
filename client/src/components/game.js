@@ -3,6 +3,7 @@ import { Redirect } from 'react-router-dom';
 import { Countdown } from './Countdown';
 import { StartBtn } from './StartBtn';
 import { DisplayWords } from './DisplayWords';
+import { TypingBox } from './TypingBox';
 import socket from '../socketConfig';
 import { 
     Flex,
@@ -21,7 +22,7 @@ const findPlayer = players=>{
 }
 export const Game = ({gameState})=> {
     console.log(gameState);
-    const { _id,players,words } = gameState;
+    const { _id,players,words,isOpen,isOver } = gameState;
     const player = findPlayer(players);
     if(_id === ""){
         return <Redirect to="/"/>
@@ -42,6 +43,7 @@ export const Game = ({gameState})=> {
 					<Flex>
 						<DisplayWords words={words} player={player} />
 					</Flex>
+                    <TypingBox isOpen = {isOpen} isOver = {isOver} gameID = {_id}/>
 					<Countdown />
 					<StartBtn as="button" player={player} gameID={_id} />
 				</Stack>
