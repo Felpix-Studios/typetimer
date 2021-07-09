@@ -4,11 +4,13 @@ import { Countdown } from './Countdown';
 import { StartBtn } from './StartBtn';
 import { DisplayWords } from './DisplayWords';
 import { TypingBox } from './TypingBox';
+import { ProgressBar } from './ProgressBar';
 import socket from '../socketConfig';
 import { 
     Flex,
     Stack,
     Heading,
+    Container,
     FormControl,
     FormLabel,
     FormErrorMessage,
@@ -28,8 +30,8 @@ export const Game = ({gameState})=> {
         return <Redirect to="/"/>
     }
     return (
-		<Flex justifyContent="center" alignItems="top" height="100vh">
-			<Stack>
+		<Flex justifyContent="center" align = "center" alignItems="top" height="100vh">
+			<Stack  align="center">
 				<Heading
 					fontSize="8vw"
 					bgGradient="linear(to-l, #56CCF2,   #2F80ED)"
@@ -39,14 +41,25 @@ export const Game = ({gameState})=> {
 				>
 					Live Game
 				</Heading>
-				<Stack justify="center" align="center">
-					<Flex>
-						<DisplayWords words={words} player={player} />
-					</Flex>
-                    <TypingBox isOpen = {isOpen} isOver = {isOver} gameID = {_id}/>
-					<Countdown />
-					<StartBtn as="button" player={player} gameID={_id} />
-				</Stack>
+				<Container align="center" m="0 auto"r>
+					<Stack justify="center" align="center" spacing={4}>
+						<Flex>
+							<DisplayWords words={words} player={player} />
+						</Flex>
+						<ProgressBar
+							players={players}
+							player={player}
+							wordsLength={words.length}
+						/>
+						<TypingBox
+							isOpen={isOpen}
+							isOver={isOver}
+							gameID={_id}
+						/>
+						<Countdown />
+						<StartBtn as="button" player={player} gameID={_id} />
+					</Stack>
+				</Container>
 			</Stack>
 		</Flex>
 	);

@@ -21,7 +21,7 @@ export const Countdown = (props) => {
         });
         socket.on('done',()=>{
             socket.removeListener('timer');
-        })
+        });
     },[]);
     const {countDown,msg} = timer;
 

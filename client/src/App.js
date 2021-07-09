@@ -50,7 +50,7 @@ export default function App() {
 					<Container height="100vh">
 						<Navbar />
 
-						<Switch>
+						<Switch class='switch'>
 							<Route exact path="/" component={Home} />
 							<Route
 								exact

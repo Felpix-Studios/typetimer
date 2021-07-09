@@ -22,6 +22,6 @@ export const StartBtn = ({player, gameID}) => {
         setShowBtn(false);
     };
     return (
-		isPartyLeader && showBtn ? <Button fontWeight="400" type="button" onClick={startMessage}>Start</Button> : null
+		isPartyLeader && showBtn ? <Button fontWeight="400" mt={10} type="button" onClick={startMessage}>Start</Button> : null
 	);
 };

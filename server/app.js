@@ -139,40 +139,41 @@ io.on('connect',(socket)=>{
 });
 
 const startGameClock = async (gameID) => {
-    console.log("startGameClock");
 	let game = await Game.findById(gameID);
 	game.startTime = new Date().getTime();
 	game = await game.save();
-	let time = 20;
-	let timerID = setInterval(function gameIntervalFunc() {
-		if (time >= 0) {
-			console.log("ticking down timer");
-			const formattedTime = calculateTime(time);
-			io.to(gameID).emit("timer", {
-				countDown: formattedTime,
-				msg: "Time Remaining",
-			});
-			time--;
-		} else {
-            console.log("timer ended");
-			(async () => {
-				let endTime = new Date().getTime();
-				let { startTime } = game;
-				game.isOver = true;
-				game.players.forEach((player, index) => {
-					if (player.WPM === -1) {
-						game.players[index].WPM = calculateWPM(
-							endTime,
-							startTime,
-							player
-						);
-					}
+	let time = 10;
+	let timerID = setInterval(
+		(function gameIntervalFunc() {
+			if (time >= 0) {
+				const formatTime = calculateTime(time);
+				io.to(gameID).emit("timer", {
+					countDown: formatTime,
+					msg: "Time Remaining",
 				});
-				game = await game.save();
-				io.to(gameID).emit("updateGame", game);
-				clearInterval(timerID);
-			})();
-		}
-		return gameIntervalFunc;
-	}, 1000);
+				time--;
+			}
+			else {
+				(async () => {
+					let endTime = new Date().getTime();
+					let game = await Game.findById(gameID);
+					let { startTime } = game;
+					game.isOver = true;
+					game.players.forEach((player, index) => {
+						if (player.WPM === -1)
+							game.players[index].WPM = calculateWPM(
+								endTime,
+								startTime,
+								player
+							);
+					});
+					game = await game.save();
+					io.to(gameID).emit("updateGame", game);
+					clearInterval(timerID);
+				})();
+			}
+			return gameIntervalFunc;
+		})(),
+		1000
+	);
 };

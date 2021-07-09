@@ -22,27 +22,42 @@ export const TypingBox = ({isOpen,isOver,gameID}) => {
             textInput.current.focus();
         }
     },[isOpen]);
+
+    useEffect(()=>{
+        socket.on("done", () => {
+			socket.removeListener("timer");
+		});
+    },[]);
+
     const resetForm = ()=>{
         setUserInput("");
     }
     const onChange = (e)=>{
-        e.preventDefault();
         let value = e.target.value;
         let lastChar = value.charAt(value.length-1);
         if(lastChar===" "){
             socket.emit('userInput',{userInput,gameID});
             resetForm();
         }else{
-            setUserInput(e.target.value);
+            setUserInput(value);
+            
         }
     }
-    return(
-        <Stack>
-            <form>
-                <FormControl>
-                    <Input type = "text"  readOnly= {isOpen || isOver} onChange = {onChange} value = {userInput} ref = {textInput} preventDefault/>
-                </FormControl>
-            </form>
-        </Stack>
-    );
+    return (
+		<Stack w="100%">
+			<form>
+				<FormControl>
+					<Input
+						type="text"
+						size="lg"
+						readOnly={isOpen || isOver}
+						onChange={onChange}
+						value={userInput}
+						ref={textInput}
+                        placeholder = "Type the words above here!"
+					/>
+				</FormControl>
+			</form>
+		</Stack>
+	);
 }
