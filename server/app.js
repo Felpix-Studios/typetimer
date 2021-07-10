@@ -1,9 +1,10 @@
 const express = require("express");
 const cors = require('cors');
 const socketio = require('socket.io');
+const path = require('path');
 const mongoose = require("mongoose");
 const app = express();
-const port = 5000;
+const port = process.env.PORT || 5000;
 let key = require('./secrets.json');
 const quote = require('./quote');
 app.use(cors());
@@ -15,7 +16,6 @@ const server = app.listen(port,()=>{
 const io = socketio(server,{
     cors:"*"
 });
-
 
 //model
 const Game = require("./models/GameInstance");
