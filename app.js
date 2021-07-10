@@ -17,6 +17,7 @@ const io = socketio(server,{
     cors:"*"
 });
 
+app.get('/',(req,res)=>res.send('This is the server!'))
 //model
 const Game = require("./models/GameInstance");
 
