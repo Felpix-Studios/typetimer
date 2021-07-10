@@ -14,7 +14,7 @@ import {
 } from "@chakra-ui/react";
 
 const typedCorrectlyStyle = {
-	"backgroundColor": "#C6F6D5"
+	"backgroundColor": "#72b186"
 };
 const currentStyle = {
     "text-decoration":"underline",

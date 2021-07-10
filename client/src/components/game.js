@@ -4,6 +4,7 @@ import { Countdown } from './Countdown';
 import { StartBtn } from './StartBtn';
 import { DisplayWords } from './DisplayWords';
 import { TypingBox } from './TypingBox';
+import { GameCode } from './GameCode';
 import { Scoreboard } from './Scoreboard';
 import { ProgressBar } from './ProgressBar';
 import socket from '../socketConfig';
@@ -31,8 +32,13 @@ export const Game = ({gameState})=> {
         return <Redirect to="/"/>
     }
     return (
-		<Flex justifyContent="center" align = "center" alignItems="top" height="100vh">
-			<Stack  align="center">
+		<Flex
+			justifyContent="center"
+			align="center"
+			alignItems="top"
+			height="100vh"
+		>
+			<Stack align="center">
 				<Heading
 					fontSize="8vw"
 					bgGradient="linear(to-l, #56CCF2,   #2F80ED)"
@@ -42,8 +48,8 @@ export const Game = ({gameState})=> {
 				>
 					Live Game
 				</Heading>
-				<Container align="center" m="0 auto"r>
-					<Stack justify="center" align="center" spacing={4}>
+				<Container align="center" m="0 auto" r>
+					<Stack justify="center" align="center" spacing={6}>
 						<Flex>
 							<DisplayWords words={words} player={player} />
 						</Flex>
@@ -58,8 +64,11 @@ export const Game = ({gameState})=> {
 							gameID={_id}
 						/>
 						<Countdown />
+
 						<StartBtn as="button" player={player} gameID={_id} />
-                        <Scoreboard players = {players}/>
+
+						<GameCode gameID={_id} gameOpen={isOpen} />
+						<Scoreboard players={players} />
 					</Stack>
 				</Container>
 			</Stack>

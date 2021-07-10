@@ -24,7 +24,9 @@ const calculatePercentage = (player, wordsLength) => {
 
 export const ProgressBar = ({players,player,wordsLength}) => {
     const percentage = calculatePercentage(player,wordsLength);
-    console.log(percentage);
+    const transitionEffect = {
+        transition: '400ms cubic-bezier(0.26, 0.8, 0.29, 0.98)'
+    }
 	return (
 		<Box justify="center" w="100%">
 			{
@@ -37,6 +39,7 @@ export const ProgressBar = ({players,player,wordsLength}) => {
 							colorScheme="cyan"
 							hasStripe
 							value={percentage}
+                            borderRadius={6}
 						/>
 					</Box>
 				</>
@@ -53,6 +56,7 @@ export const ProgressBar = ({players,player,wordsLength}) => {
 								colorScheme="cyan"
 								hasStripe
 								value={percentage}
+								style={transitionEffect}
 							/>
 						</Box>
 					</>

@@ -50,18 +50,11 @@ export const Scoreboard = ({players}) => {
 								<Th>{index + 1}</Th>
 								<Td>{player.nickname}</Td>
 								<Td>{player.WPM}</Td>
-								<Td>{player.accuracy}</Td>
+								<Td>{player.accuracy}%</Td>
 							</Tr>
 						);
 					})}
 				</Tbody>
-				<Tfoot>
-					<Tr>
-						<Th>#</Th>
-						<Th>Player Username</Th>
-						<Th isNumeric>WPM</Th>
-					</Tr>
-				</Tfoot>
 			</Table>
 		</Stack>
 	);

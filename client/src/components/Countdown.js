@@ -15,7 +15,12 @@ import {
 
 export const Countdown = (props) => {
     const [timer,setTimer] = useState({countDown:"",msg:""});
+    
     useEffect(()=>{
+        setTimer({
+			countDown: "∞",
+			msg: "To get the game going, click the start button below.",
+		});
         socket.on('timer',(data)=>{
             setTimer(data);
         });
