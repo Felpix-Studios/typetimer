@@ -155,7 +155,7 @@ const startGameClock = async (gameID) => {
 	let game = await Game.findById(gameID);
 	game.startTime = new Date().getTime();
 	game = await game.save();
-	let time = 10;
+	let time = 180;
 	let timerID = setInterval(
 		(function gameIntervalFunc() {
 			if (time >= 0) {
