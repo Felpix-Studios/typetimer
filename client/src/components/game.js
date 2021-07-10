@@ -4,6 +4,7 @@ import { Countdown } from './Countdown';
 import { StartBtn } from './StartBtn';
 import { DisplayWords } from './DisplayWords';
 import { TypingBox } from './TypingBox';
+import { Scoreboard } from './Scoreboard';
 import { ProgressBar } from './ProgressBar';
 import socket from '../socketConfig';
 import { 
@@ -58,6 +59,7 @@ export const Game = ({gameState})=> {
 						/>
 						<Countdown />
 						<StartBtn as="button" player={player} gameID={_id} />
+                        <Scoreboard players = {players}/>
 					</Stack>
 				</Container>
 			</Stack>

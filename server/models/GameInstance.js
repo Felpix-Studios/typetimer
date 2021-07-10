@@ -12,6 +12,14 @@ const PlayerSchema = new mongoose.Schema({
         type:Boolean,
         default:false
     },
+    mistakes:{
+        type: Number,
+        default:0
+    },
+    accuracy:{
+        type: Number,
+        default:100
+    },
     WPM:{
         type:Number,
         default:-1

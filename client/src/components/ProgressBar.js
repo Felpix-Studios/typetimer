@@ -29,10 +29,10 @@ export const ProgressBar = ({players,player,wordsLength}) => {
 		<Box justify="center" w="100%">
 			{
 				<>
-					<Heading align="left" as="h3" size="lg">
+					<Heading align="left" as="h3" size="lg" mb={2}>
 						{player.nickname}
 					</Heading>
-					<Box key={player._id} align="left">
+					<Box key={player._id} align="left" mb={4}>
 						<Progress
 							colorScheme="cyan"
 							hasStripe
@@ -41,6 +41,23 @@ export const ProgressBar = ({players,player,wordsLength}) => {
 					</Box>
 				</>
 			}
+			{players.map((playerObj) => {
+				const percentage = calculatePercentage(playerObj, wordsLength);
+				return playerObj._id !== player._id ? (
+					<>
+						<Heading align="left" as="h4" size="md" mb={2}>
+							{playerObj.nickname}
+						</Heading>
+						<Box key={playerObj._id} align="left" mb={4}>
+							<Progress
+								colorScheme="cyan"
+								hasStripe
+								value={percentage}
+							/>
+						</Box>
+					</>
+				) : null;
+			})}
 		</Box>
 	);
 };

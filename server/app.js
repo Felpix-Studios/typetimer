@@ -130,6 +130,18 @@ io.on('connect',(socket)=>{
                         socket.emit('done');
                         io.to(gameID).emit('updateGame',game);
                     }
+                }else{
+                    player.currentWordIndex++;
+                    player.mistakes++;
+                    if(player.mistakes!==0){
+                        player.accuracy = Math.round(
+							((player.currentWordIndex-player.mistakes) /
+								player.currentWordIndex) *
+								100
+						);
+                    }
+                    game = await game.save();
+                    io.to(gameID).emit("updateGame", game);
                 }
             }
         }catch(err){
