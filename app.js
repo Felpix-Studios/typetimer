@@ -134,15 +134,26 @@ io.on('connect',(socket)=>{
                 }else{
                     player.currentWordIndex++;
                     player.mistakes++;
-                    if(player.mistakes!==0){
-                        player.accuracy = Math.round(
-							((player.currentWordIndex-player.mistakes) /
-								player.currentWordIndex) *
-								100
-						);
-                    }
-                    game = await game.save();
-                    io.to(gameID).emit("updateGame", game);
+                    if (player.currentWordIndex !== game.words.length) {
+						game = await game.save();
+						io.to(gameID).emit("updateGame", game);
+					} else {
+						let endTime = new Date().getTime();
+						let { startTime } = game;
+                        if (player.mistakes !== 0) {
+							player.accuracy = Math.round(
+								((player.currentWordIndex - player.mistakes) /
+									player.currentWordIndex) *
+									100
+							);
+						}
+						player.WPM = calculateWPM(endTime, startTime, player);
+						game = await game.save();
+						console.log("sending out done");
+						socket.emit("done");
+						io.to(gameID).emit("updateGame", game);
+					}
+                    
                 }
             }
         }catch(err){
