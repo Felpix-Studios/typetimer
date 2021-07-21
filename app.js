@@ -140,13 +140,7 @@ io.on('connect',(socket)=>{
 					} else {
 						let endTime = new Date().getTime();
 						let { startTime } = game;
-                        if (player.mistakes !== 0) {
-							player.accuracy = Math.round(
-								((player.currentWordIndex - player.mistakes) /
-									player.currentWordIndex) *
-									100
-							);
-						}
+						player.accuracy = Math.round(((player.currentWordIndex - player.mistakes)/player.currentWordIndex) *100);
 						player.WPM = calculateWPM(endTime, startTime, player);
 						game = await game.save();
 						console.log("sending out done");
