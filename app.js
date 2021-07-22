@@ -134,13 +134,13 @@ io.on('connect',(socket)=>{
                 }else{
                     player.currentWordIndex++;
                     player.mistakes++;
+                    player.accuracy = Math.round(((player.currentWordIndex - player.mistakes)/player.currentWordIndex) *100);
                     if (player.currentWordIndex !== game.words.length) {
 						game = await game.save();
 						io.to(gameID).emit("updateGame", game);
 					} else {
 						let endTime = new Date().getTime();
 						let { startTime } = game;
-						player.accuracy = Math.round(((player.currentWordIndex - player.mistakes)/player.currentWordIndex) *100);
 						player.WPM = calculateWPM(endTime, startTime, player);
 						game = await game.save();
 						console.log("sending out done");
