@@ -1,10 +1,6 @@
 const express = require("express");
 const cors = require('cors');
-const socketio = require('socket.io')(server,{
-    cors:{
-        origin:"*"
-    }
-});
+const socketio = require('socket.io')
 const path = require('path');
 const mongoose = require("mongoose");
 const app = express();
@@ -17,8 +13,11 @@ app.use(cors());
 const server = app.listen(port,()=>{
     console.log(`at port localhost:${port}`);
 });
+
 const io = socketio(server,{
-    cors:"*"
+    cors:{
+        origin:"*"
+    }
 });
 
 app.get('/',(req,res)=>res.send('This is the server!'))
